@@ -7,6 +7,7 @@ const Header = props => {
     const menu = <div>
         <FlatButton label='Home' href='/' />
         <FlatButton label='About' href='/about' />
+        <FlatButton label='Form' href='/form' />
         {!userId ?
             <FlatButton label='login' href='/login' /> :
             <FlatButton label='Forms data' href='/data' />

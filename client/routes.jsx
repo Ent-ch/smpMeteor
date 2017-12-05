@@ -3,10 +3,11 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { mount } from 'react-mounter';
 
 import App from '/imports/ui/App';
+import AccountsUIWrapper from '/imports/ui/AccountsUIWrapper';
 import HomePage from '/imports/ui/HomePage';
 import AboutPage from '/imports/ui/AboutPage';
 import FormsData from '/imports/ui/FormsData';
-import AccountsUIWrapper from '/imports/ui/AccountsUIWrapper';
+import Form from '/imports/ui/Form';
 
 FlowRouter.route('/', {
   name: 'Home',
@@ -27,7 +28,7 @@ FlowRouter.route('/about', {
 });
 
 FlowRouter.route('/login', {
-  name: 'About',
+  name: 'login',
   action() {
     mount(App, {
       content: <AccountsUIWrapper />
@@ -36,10 +37,19 @@ FlowRouter.route('/login', {
 });
 
 FlowRouter.route('/data', {
-  name: 'About',
+  name: 'data',
   action() {
     mount(App, {
       content: <FormsData />
+    });
+  }
+});
+
+FlowRouter.route('/form', {
+  name: 'form',
+  action() {
+    mount(App, {
+      content: <Form />
     });
   }
 });

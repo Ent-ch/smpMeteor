@@ -1,4 +1,5 @@
 /* CSS declarations go here */
+
 body {
     padding: 0;
     margin: 0;
@@ -6,4 +7,9 @@ body {
 
 .contentWrapper {
     min-height: 400px;
+}
+
+.formWrapper {
+    margin: 40px auto;
+    width: 400px;
 }
