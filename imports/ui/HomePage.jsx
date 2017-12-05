@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HomePage = () => {
+const HomePage = props => {
   return 'This is the homepage';
 };
 
