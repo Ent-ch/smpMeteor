@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
     Table,
     TableBody,
@@ -7,44 +7,49 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import { withTracker } from 'meteor/react-meteor-data';
+import { userForms } from '../api/userForms.js';
 
-const FormsData = props => {
-    return <Table>
-        <TableHeader>
-            <TableRow>
-                <TableHeaderColumn>ID</TableHeaderColumn>
-                <TableHeaderColumn>Name</TableHeaderColumn>
-                <TableHeaderColumn>Status</TableHeaderColumn>
-            </TableRow>
-        </TableHeader>
-        <TableBody>
-            <TableRow>
-                <TableRowColumn>1</TableRowColumn>
-                <TableRowColumn>John Smith</TableRowColumn>
-                <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>2</TableRowColumn>
-                <TableRowColumn>Randal White</TableRowColumn>
-                <TableRowColumn>Unemployed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>3</TableRowColumn>
-                <TableRowColumn>Stephanie Sanders</TableRowColumn>
-                <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>4</TableRowColumn>
-                <TableRowColumn>Steve Brown</TableRowColumn>
-                <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-                <TableRowColumn>5</TableRowColumn>
-                <TableRowColumn>Christopher Nolan</TableRowColumn>
-                <TableRowColumn>Unemployed</TableRowColumn>
-            </TableRow>
-        </TableBody>
-    </Table>;
+class FormsData extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            hideCompleted: false,
+        };
+    }
+
+    render() {
+        const { userForms } = this.props;
+        console.log(userForms);
+        return <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableHeaderColumn>Name</TableHeaderColumn>
+                    <TableHeaderColumn>Phone</TableHeaderColumn>
+                    <TableHeaderColumn>E-mail</TableHeaderColumn>
+                    <TableHeaderColumn>Address</TableHeaderColumn>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {userForms.map((el, i) => 
+                    <TableRow key={i}>
+                        <TableRowColumn>{el.name + (el.firstName || ' ')}</TableRowColumn>
+                        <TableRowColumn>{el.phone}</TableRowColumn>
+                        <TableRowColumn>{el.email}</TableRowColumn>
+                        <TableRowColumn>{el.address}</TableRowColumn>
+                    </TableRow>
+                )}
+            </TableBody>
+        </Table>;
+    }
 };
 
-export default FormsData;
+export default withTracker(() => {
+    Meteor.subscribe('userForms');
+
+    return {
+        userForms: userForms.find({}, { sort: { name: -1 } }).fetch(),
+        currentUser: Meteor.user(),
+    };
+})(FormsData);
