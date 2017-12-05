@@ -21,7 +21,7 @@ class FormsData extends Component {
 
     render() {
         const { userForms } = this.props;
-        console.log(userForms);
+        
         return <Table>
             <TableHeader>
                 <TableRow>

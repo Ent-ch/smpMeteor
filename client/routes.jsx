@@ -52,7 +52,15 @@ FlowRouter.route('/data', {
     mount(App, {
       content: <FormsData />
     });
-  }
+  },
+  triggersEnter: [function (context, redirect) {
+    // TODO permission
+    const userId = Meteor.userId();
+
+    if (!userId) {
+      redirect('/login');
+    }
+  }]
 });
 
 FlowRouter.route('/form', {
