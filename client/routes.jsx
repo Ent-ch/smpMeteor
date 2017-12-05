@@ -36,6 +36,16 @@ FlowRouter.route('/login', {
   }
 });
 
+FlowRouter.route('/profile', {
+  name: 'profile',
+  action() {
+    mount(App, {
+      content: <AccountsUIWrapper />
+    });
+  }
+});
+
+
 FlowRouter.route('/data', {
   name: 'data',
   action() {

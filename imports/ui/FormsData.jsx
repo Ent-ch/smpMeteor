@@ -8,7 +8,7 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 import { withTracker } from 'meteor/react-meteor-data';
-import { userForms } from '../api/userForms.js';
+import { userForms } from '../api/userForms';
 
 class FormsData extends Component {
     constructor(props) {
@@ -37,7 +37,7 @@ class FormsData extends Component {
                         <TableRowColumn>{el.name + (el.firstName || ' ')}</TableRowColumn>
                         <TableRowColumn>{el.phone}</TableRowColumn>
                         <TableRowColumn>{el.email}</TableRowColumn>
-                        <TableRowColumn>{el.address}</TableRowColumn>
+                        <TableRowColumn>{el.Address ? `${el.Address.Detail}, ${el.Address.City}, ${el.Address.Province}, ${el.Address.postalCode} , ${el.Address.Country}` : ''}</TableRowColumn>
                     </TableRow>
                 )}
             </TableBody>

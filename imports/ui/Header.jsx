@@ -10,7 +10,10 @@ const Header = props => {
         <FlatButton label='Form' href='/form' />
         {!userId ?
             <FlatButton label='login' href='/login' /> :
-            <FlatButton label='Forms data' href='/data' />
+            <span>
+                <FlatButton label='Forms data' href='/data' />
+                <FlatButton label='Profile' href='/profile' />
+            </span>
         }
     </div>;
 
